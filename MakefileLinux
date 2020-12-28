@@ -1,0 +1,48 @@
+NAME = cub3D
+
+CUB3D_SRC =	checkers.c \
+			closing.c \
+			color_parsing.c \
+			config_parsing.c \
+			cub3d.c \
+			gnl.c \
+			input.c \
+			libft.c \
+			libft_2.c \
+			libft_3.c \
+			map_parsing.c \
+			map_parsing_2.c \
+			movement.c \
+			raycasting.c \
+			raycasting_2.c \
+			save_screenshot.c \
+			sprites.c \
+			structs_initializer.c \
+			textures_processing.c \
+
+OBJ = $(CUB3D_SRC:.c=.o)
+
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+IFLAG = -I /usr/local/include
+LFLAG = -L /usr/local/lib -lmlx -lXext -lX11
+
+LIBS = -lm
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) $(IFLAG) -o $(NAME) $(OBJ) $(LFLAG) $(LIBS)
+
+%.o: %.c
+	@$(CC) $(CFLAGS) $(IFLAG) -c $< -o $@
+
+clean:
+	@rm -f $(OBJ)
+
+fclean: clean
+	@rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
